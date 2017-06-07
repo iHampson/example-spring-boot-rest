@@ -14,12 +14,12 @@ import com.ironyard.springboot.data.ToDoItem;
 @RestController
 public class ToDoController {
 	
-	private HashMap<Long, ToDoItem> tempStore = new HashMap();
+	private HashMap<Long, ToDoItem> tempStore = new HashMap<Long, ToDoItem>();
 	
 	/**
 	 * Create the specified ToDoItem
 	 * @param createThis
-	 * @return populated todoitem
+	 * @return populated ToDoItem
 	 */
 	@RequestMapping(value = "/todoitems", method = RequestMethod.POST)
 	public ToDoItem create(@RequestBody ToDoItem createThis){
@@ -33,7 +33,7 @@ public class ToDoController {
 	/**
 	 * Get the specified Item
 	 * @param id
-	 * @return requested todoitem
+	 * @return requested ToDoItem
 	 */
 	@RequestMapping(value = "/todoitems/{id}", method = RequestMethod.GET)
 	public ToDoItem get(@PathVariable Long id){
@@ -43,7 +43,7 @@ public class ToDoController {
 	
 	/**
 	 * 
-	 * @return Collection of All Items
+	 * @return Collection of all ToDoItems
 	 */
 	@RequestMapping(value = "/todoitems", method = RequestMethod.GET)
 	public Collection<ToDoItem> get() {
