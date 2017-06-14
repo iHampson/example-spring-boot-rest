@@ -10,23 +10,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ironyard.repo.NotePadRepository;
 import com.ironyard.repo.ToDoRepository;
+import com.ironyard.springboot.data.NotePad;
 import com.ironyard.springboot.data.ToDoItem;
 
 @RestController
 public class ToDoController {
 	
 	@Autowired
-	private ToDoRepository myRepo;
+	private ToDoRepository myToDoRepo;
 	
-	/**
-	 * Create the specified ToDoItem
-	 * @param createThis
-	 * @return populated ToDoItem
-	 */
+	@Autowired
+	private NotePadRepository myNotepadRepo;
+	
+
+	@RequestMapping(value = "/notepad", method = RequestMethod.POST)
+	public NotePad create(@RequestBody NotePad createThis){
+		myNotepadRepo.save(createThis);
+		return createThis;
+	}
+	
 	@RequestMapping(value = "/todo", method = RequestMethod.POST)
 	public ToDoItem create(@RequestBody ToDoItem createThis){
-		myRepo.save(createThis);
+		myToDoRepo.save(createThis);
 		return createThis;
 	}
 	
@@ -38,7 +45,7 @@ public class ToDoController {
 	@RequestMapping(value = "/todo/{id}", method = RequestMethod.GET)
 	public ToDoItem get(@PathVariable Long id){
 		// set ID
-		return myRepo.findOne(id);
+		return myToDoRepo.findOne(id);
 	}
 	
 	/**
@@ -48,6 +55,6 @@ public class ToDoController {
 	@RequestMapping(value = "/todo", method = RequestMethod.GET)
 	public Collection<ToDoItem> get() {
 		// set ID
-		return myRepo.findAll();
+		return myToDoRepo.findAll();
 	}
 }
