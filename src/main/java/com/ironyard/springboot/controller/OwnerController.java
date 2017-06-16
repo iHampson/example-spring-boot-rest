@@ -140,7 +140,7 @@ public class OwnerController {
 	}
 	
 	@RequestMapping(value = "/pets/ageGroup/{ageGroup}", method = RequestMethod.GET)
-  public List<Pet> getPetByBreed(@PathVariable Pet.ageGroup ageGroup){
+  public List<Pet> getPetByAgeGroup(@PathVariable Pet.ageGroup ageGroup){
   	return petRepo.findByAgeGroup(ageGroup);
   }
 	
